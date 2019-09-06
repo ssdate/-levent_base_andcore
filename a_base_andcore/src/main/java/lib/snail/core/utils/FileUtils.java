@@ -9,6 +9,9 @@ public class FileUtils {
 
     public static String getFileType(String end){
 //        return "*/*";
+        if(!Tools.isEmpty(end)){
+            end = end.toLowerCase();
+        }
         if(end.equals("doc")  ){
             return "application/msword";
         }else if(end.equals("docx")  ){
