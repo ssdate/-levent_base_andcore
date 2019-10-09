@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.io.InputStream;
 
@@ -36,7 +37,7 @@ public class JsonHttpListener<M> implements IHttpListener {
             String resContent = DataConver.getStringByInputStream(inputStream);
             LogUtil.i(TAG,"********请求结果："+resContent+"***********");
             //转对象--由于同一接口不同情况返回来的数据结构不一致无法同时转成同一对象，现改成json对象返回
-            final M respObjData = JSON.parseObject(resContent, resClass);
+            final M respObjData = JSON.parseObject(JSON.toJSONString(resContent, SerializerFeature.WriteMapNullValue), resClass);
 //            final JSONObject jsonObject = JSON.parseObject(resContent);
             handler.post(new Runnable() {
                 @Override
