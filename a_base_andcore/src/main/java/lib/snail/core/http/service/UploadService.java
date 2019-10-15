@@ -102,7 +102,7 @@ public class UploadService implements IHttpService {
             RequestBody body = builder.build();
             //创建Request
             final Request request = new Request.Builder().addHeader("Accept-Encoding", "gzip").url(requestUrl).post(body).build();
-            final  Call call = okHttpClient.newBuilder().writeTimeout(50, TimeUnit.SECONDS).build().newCall(request);
+            final  Call call = okHttpClient.newBuilder().writeTimeout(30, TimeUnit.SECONDS).readTimeout(30,TimeUnit.SECONDS).build().newCall(request);
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
